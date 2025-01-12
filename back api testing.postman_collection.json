@@ -1,0 +1,160 @@
+{
+	"info": {
+		"_postman_id": "8efd1c0b-830e-4855-bdb5-29053c6f205f",
+		"name": "back api testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33950093"
+	},
+	"item": [
+		{
+			"name": "AddMovie",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost/api/AddMovie?code=tl1234&title=12345&rating=6.5&year=1999&image_link=adsfasfd",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"AddMovie"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "tl1234"
+						},
+						{
+							"key": "title",
+							"value": "12345"
+						},
+						{
+							"key": "rating",
+							"value": "6.5"
+						},
+						{
+							"key": "year",
+							"value": "1999"
+						},
+						{
+							"key": "image_link",
+							"value": "adsfasfd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FetchMovies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/api/FetchMovies",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"FetchMovies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FetchLatestTopRatedMovies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/api/FetchLatestTopRatedMovies",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"FetchLatestTopRatedMovies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetMovieByCode",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/api/GetMovieByCode?code=tt1375666",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"GetMovieByCode"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "tt1375666"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchMovies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/api/SearchMovies?query=The&year=2008,1972&minRating=6",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"SearchMovies"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "The"
+						},
+						{
+							"key": "year",
+							"value": "2008,1972"
+						},
+						{
+							"key": "minRating",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/api/AddTaskImdbParser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/api/AddTaskImdbParser",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"AddTaskImdbParser"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

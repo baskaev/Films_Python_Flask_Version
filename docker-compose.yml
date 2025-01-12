@@ -1,0 +1,97 @@
+#version: '3.8'
+
+services:
+
+  rod-manager:
+    image: ghcr.io/go-rod/rod:v0.114.8
+    container_name: rod-manager
+    networks:
+      - app-network
+    ports:
+      - "7317:7317"
+    #environment:
+      # Добавьте переменные окружения, если нужно
+
+
+  # это не трогай это для го я оставил
+  # backend:
+  #   build:
+  #     context: ./backfilms
+  #   ports:
+  #     - "8082:8081"
+  #   networks:
+  #     - app-network
+  #   depends_on:
+  #     - db
+
+
+ 
+  # Бэкенд на Python (Flask)
+  backend:
+    build:
+      context: ./flaskBackend  
+    ports:
+      - "8082:8081"  #проброс с нашего 8082 на внутренний порт контейнера 8081
+    networks:
+      - app-network
+    depends_on:
+      - db
+    environment:
+      FLASK_ENV: development  # Опционально: режим разработки
+      DATABASE_URL: postgresql://user:password@db:5432/films_db  # Подключение к PostgreSQL
+
+
+  taskworker:
+    build:
+      context: ./taskworker
+    networks:
+      - app-network
+    depends_on:
+      - db
+      - rod-manager
+    environment:
+      ROD_REMOTE: "ws://rod-manager:7317" # Адрес Rod Manager для подключения
+    links:
+       - rod-manager
+
+  frontend:
+    build:
+      # context: ./vue-frontend
+      context: ./frontend-react
+    ports:
+      - "8080:80"
+    networks:
+      - app-network
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: films_db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+      
+  nginx:
+    build:
+      context: ./nginx  # Сборка из папки Nginx
+    ports:
+      - "80:80"  # Прокси на порт 80
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
