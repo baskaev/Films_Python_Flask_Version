@@ -41,6 +41,9 @@ P.S. Будете тестить открывайте более-менее ст
 <img  src="flask.png" />
 <img  src="Echo.png" />
 
+Тесты показали трехкратное превосходство Echo надо Flask.
+Дополнительно сравнение Echo и FastApi: https://www.youtube.com/watch?v=sxdpKG-6HSY
+
 Если тоже хотите проверить на своей машине то установите wrk (для убунту это sudo apt install wrk) и затем запустите:
 wrk -t4 -c100 -d10s http://localhost/api/FetchMovies
 
